@@ -7,9 +7,9 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.tree import DecisionTreeClassifier
 
 # Retrieve the data and extract the input features (X) and target (y)
-dataset = openml.datasets.get_dataset('baseball', download_data=True, download_qualities=True,
+dataset = openml.datasets.get_dataset('sick', download_data=True, download_qualities=True,
                                       download_features_meta_data=True)
-X, y, _, feature_names = dataset.get_data(target='Hall_of_Fame')
+X, y, _, feature_names = dataset.get_data(target='Class')
 X = np.array(X)
 y = y.to_numpy().reshape(-1, 1)
 
@@ -77,7 +77,7 @@ for r in range(nrepeats):
             ytrainsub = ytrain[0:curr_size]
 
             # Learn a decision tree
-            dtlearner = DecisionTreeClassifier()
+            dtlearner = DecisionTreeClassifier(min_samples_leaf=50)
             dtlearner.fit(Xtrainsub, ytrainsub)
 
             # Keep track of this size and calculate the accuracy for this size/repeat/fold combination

@@ -77,7 +77,7 @@ for r in range(nrepeats):
             ytrainsub = ytrain[0:curr_size]
 
             # Learn a decision tree
-            dtlearner = DecisionTreeClassifier()
+            dtlearner = DecisionTreeClassifier(min_samples_split=100)
             dtlearner.fit(Xtrainsub, ytrainsub)
 
             # Keep track of this size and calculate the accuracy for this size/repeat/fold combination
