@@ -8,9 +8,15 @@ from sklearn.model_selection import StratifiedKFold
 import matplotlib.pyplot as plt
 
 # retrieve the data and extract the input features (X) and target (y)
-dataset = openml.datasets.get_dataset('lisbon-house-prices',download_data=True,download_qualities=True,download_features_meta_data=True)
-X, y, cat_features, feature_names = dataset.get_data(target='Price')
+dataset = openml.datasets.get_dataset('baseball',download_data=True,download_qualities=True,download_features_meta_data=True)
+X, y, cat_features, feature_names = dataset.get_data(target='Hall_of_Fame')
 X = np.array(X)
+
+#Remove features
+outfield_index = feature_names.index('Position')
+X = np.delete(X, outfield_index, axis=1)
+
+
 y = y.to_numpy().reshape(-1,1)
 
 # determine which features are string (discrete)
